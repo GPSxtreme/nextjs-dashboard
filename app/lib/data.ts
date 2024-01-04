@@ -229,3 +229,45 @@ export async function getUser(email: string) {
     throw new Error('Failed to fetch user.');
   }
 }
+
+export async function getLenOfInvoices() {
+  try {
+    const invoices = await sql`SELECT COUNT(*) FROM invoices`;
+    return invoices.rows[0].count;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    throw new Error('Failed to fetch data.');
+  }
+}
+
+export async function getLenOfInvoicesCollected() {
+  try {
+    const invoices =
+      await sql`SELECT COUNT(*) FROM invoices WHERE status = 'paid'`;
+    return invoices.rows[0].count;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    throw new Error('Failed to fetch data.');
+  }
+}
+
+export async function getLenOfInvoicesPending() {
+  try {
+    const invoices =
+      await sql`SELECT COUNT(*) FROM invoices WHERE status = 'pending'`;
+    return invoices.rows[0].count;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    throw new Error('Failed to fetch data.');
+  }
+}
+
+export async function getLenOfCustomers() {
+  try {
+    const invoices = await sql`SELECT COUNT(*) FROM customers`;
+    return invoices.rows[0].count;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    throw new Error('Failed to fetch data.');
+  }
+}
